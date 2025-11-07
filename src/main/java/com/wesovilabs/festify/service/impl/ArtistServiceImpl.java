@@ -34,12 +34,7 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public List<ArtistResumeResponse> listArtists() {
-        Pageable pageable =
-                PageRequest.of(0, 5,
-                        Sort.by("price").descending().and(Sort.by("name"))
-                );
-        Example<ArtistEntity> example = Example.of(new ArtistEntity());
-        List<ArtistEntity> artists =  this.artistJpaRepository.findAll(example);
+        List<ArtistEntity> artists =  this.artistJpaRepository.findAll();
         return artists.stream().map(ArtistMapper::mapArtistToArtistResume).toList();
     }
 
